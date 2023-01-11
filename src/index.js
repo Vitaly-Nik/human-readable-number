@@ -1,7 +1,7 @@
 module.exports = function toReadable(number) {
     let numberToString = String(number);
-    let numberArray = numberToString.split("");
-    let oneToNineteen = {
+    let numberToArray = numberToString.split("");
+    let oneTotwenty = {
         0: "zero",
         1: "one",
         2: "two",
@@ -37,20 +37,20 @@ module.exports = function toReadable(number) {
     };
 
     if (number >= 0 && number < 21) {
-        return oneToNineteen[number];
+        return oneTotwenty[number];
     } else if (numberToString.length === 2 && number % 10 === 0) {
-        return dozens[numberArray[0]];
+        return dozens[numberToArray[0]];
     } else if (number > 20 && number < 100) {
-        return `${dozens[numberArray[0]]} ${oneToNineteen[numberArray[1]]}`;
+        return `${dozens[numberToArray[0]]} ${oneTotwenty[numberToArray[1]]}`;
     } else if (numberToString.length === 3 && numberToString.endsWith("00")) {
-        return `${oneToNineteen[numberArray[0]]} hundred`;
-    } else if (numberToString.length === 3 && numberArray[1] === "0" && numberArray[2] != "0") {
-        return `${oneToNineteen[numberArray[0]]} hundred ${oneToNineteen[numberArray[2]]}`;
+        return `${oneTotwenty[numberToArray[0]]} hundred`;
+    } else if (numberToString.length === 3 && numberToArray[1] === "0" && numberToArray[2] != "0") {
+        return `${oneTotwenty[numberToArray[0]]} hundred ${oneTotwenty[numberToArray[2]]}`;
     } else if (numberToString.length === 3 && Number(numberToString.slice(-2)) >= 10 && Number(numberToString.slice(-2)) < 20) {
-        return `${oneToNineteen[numberArray[0]]} hundred ${oneToNineteen[numberToString.slice(-2)]}`
-    } else if (numberToString.length === 3 && numberArray[1] != "0" && numberArray[1] != "1" && numberArray[2] === "0") {
-        return `${oneToNineteen[numberArray[0]]} hundred ${dozens[numberArray[1]]}`
+        return `${oneTotwenty[numberToArray[0]]} hundred ${oneTotwenty[numberToString.slice(-2)]}`
+    } else if (numberToString.length === 3 && numberToArray[1] != "0" && numberToArray[1] != "1" && numberToArray[2] === "0") {
+        return `${oneTotwenty[numberToArray[0]]} hundred ${dozens[numberToArray[1]]}`
     } else if (numberToString.length === 3 && !numberToString.endsWith("00")) {
-        return `${oneToNineteen[numberArray[0]]} hundred ${dozens[numberArray[1]]} ${oneToNineteen[numberArray[2]]}`;
+        return `${oneTotwenty[numberToArray[0]]} hundred ${dozens[numberToArray[1]]} ${oneTotwenty[numberToArray[2]]}`;
     }
 };
